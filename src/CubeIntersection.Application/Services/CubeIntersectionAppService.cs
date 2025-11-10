@@ -9,9 +9,6 @@ public sealed class CubeIntersectionAppService(ICubeIntersectionService domainSe
 {
     public IntersectionResultDto Calculate(CubeInputDto first, CubeInputDto second)
     {
-        ValidateInput(first);
-        ValidateInput(second);
-
         var cubeA = new Cube(first.SideLength, new Position(first.X, first.Y, first.Z));
         var cubeB = new Cube(second.SideLength, new Position(second.X, second.Y, second.Z));
 
@@ -22,11 +19,5 @@ public sealed class CubeIntersectionAppService(ICubeIntersectionService domainSe
             Intersects = result.Intersects,
             Volume = result.Volume
         };
-    }
-
-    private static void ValidateInput(CubeInputDto dto)
-    {
-        if (dto.SideLength <= 0)
-            throw new ArgumentException("Side length must be greater than zero.");
     }
 }

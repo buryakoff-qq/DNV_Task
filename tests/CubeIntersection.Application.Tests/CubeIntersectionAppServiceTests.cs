@@ -6,12 +6,12 @@ namespace CubeIntersection.Application.Tests;
 
 public sealed class CubeIntersectionAppServiceTests
 {
-    private readonly CubeIntersectionAppService _appService;
+    private readonly CubeIntersectionAppService _sut;
 
     public CubeIntersectionAppServiceTests()
     {
         var domainService = new CubeIntersectionDomainService();
-        _appService = new CubeIntersectionAppService(domainService);
+        _sut = new CubeIntersectionAppService(domainService);
     }
 
     [Fact]
@@ -20,7 +20,7 @@ public sealed class CubeIntersectionAppServiceTests
         var first = new CubeInputDto { SideLength = 2, X = 0, Y = 0, Z = 0 };
         var second = new CubeInputDto { SideLength = 2, X = 1, Y = 0, Z = 0 };
 
-        var result = _appService.Calculate(first, second);
+        var result = _sut.Calculate(first, second);
 
         Assert.True(result.Intersects);
         Assert.True(result.Volume > 0);
@@ -32,7 +32,7 @@ public sealed class CubeIntersectionAppServiceTests
         var first = new CubeInputDto { SideLength = 2, X = 0, Y = 0, Z = 0 };
         var second = new CubeInputDto { SideLength = 2, X = 5, Y = 0, Z = 0 };
 
-        var result = _appService.Calculate(first, second);
+        var result = _sut.Calculate(first, second);
 
         Assert.False(result.Intersects);
         Assert.Equal(0, result.Volume);
@@ -44,7 +44,7 @@ public sealed class CubeIntersectionAppServiceTests
         var first = new CubeInputDto { SideLength = 0, X = 0, Y = 0, Z = 0 };
         var second = new CubeInputDto { SideLength = 2, X = 0, Y = 0, Z = 0 };
 
-        Assert.Throws<ArgumentException>(() => _appService.Calculate(first, second));
+        Assert.Throws<ArgumentException>(() => _sut.Calculate(first, second));
     }
     [Fact]
     public void ShouldHandleCubeInsideAnother()
@@ -52,7 +52,7 @@ public sealed class CubeIntersectionAppServiceTests
         var first = new CubeInputDto { SideLength = 4, X = 0, Y = 0, Z = 0 };
         var second = new CubeInputDto { SideLength = 2, X = 0, Y = 0, Z = 0 };
 
-        var result = _appService.Calculate(first, second);
+        var result = _sut.Calculate(first, second);
 
         Assert.True(result.Intersects);
         Assert.Equal(8, result.Volume);
