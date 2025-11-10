@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>CubeIntersection.ConsoleApp</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\tests\CubeIntersection.Domain.Tests\CubeIntersection.Domain.Tests.csproj" />
+      <ProjectReference Include="..\CubeIntersection.Application\CubeIntersection.Application.csproj" />
+    </ItemGroup>
+
+</Project>
